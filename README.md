@@ -34,7 +34,7 @@ The project evaluates three different approaches to find the global optimum:
 
 For a detailed theoretical explanation and step-by-step mathematical proof, please refer to the full documentation written in Romanian:
 
-[Read the Romanian Documentation (PDF)](TO_NLP_Cosereanu_Emanuel_problema1.pdf)
+[Read the Romanian Documentation (PDF)](TO_NLP_Cosereanu_Emanuel_problema_1.pdf)
 
 ## Requirements
 
