@@ -1,50 +1,64 @@
-# Nonlinear Programming Optimization: Cylindrical Tank Design
+# Nonlinear Programming Optimization
 
-This repository contains the mathematical modeling, analysis, and algorithmic implementation for a nonlinear optimization problem focused on industrial design efficiency.
+This repository contains the implementation of several optimization techniques applied to a specific industrial problem: minimizing harmful emissions during the mixing process of two petroleum products at a refinery.
 
-## Problem Description
+The project includes a theoretical analysis of the objective function, mathematical modeling, and a performance comparison between exact solvers, iterative methods, and heuristic algorithms.
 
-The project addresses the design of a cylindrical storage tank with a fixed volume of $500 m^3$. The objective is to minimize the total construction cost, which is determined by the surface area of the materials used for the base and the lateral wall.
+## Problem Definition
 
-### Objectives and Constraints
-* [cite_start]**Objective Function**: Minimize the cost function $f(r, h) = 2 \cdot \pi \cdot r^2 + 2 \cdot \pi \cdot r \cdot h$[cite: 13, 14].
-* [cite_start]**Equality Constraint**: The volume must be exactly $500 m^3$, defined by $g(r, h) = \pi \cdot r^2 \cdot h = 500$[cite: 15, 16].
-* [cite_start]**Variables**: The radius ($r$) and height ($h$) of the cylinder[cite: 11, 12].
+The goal is to minimize the emission function:
+**f(t1, t2) = ln(2^t1 + 2^t2)**
 
-## Technical Implementation
+Subject to the following constraints:
+*   -0.4 <= t1 <= 2 (Temperature of the first product)
+*   3.2 <= t2 <= 10 (Temperature of the second product)
+*   t1 + t2 >= 4.5 (Minimum combined temperature threshold)
 
-The project explores the problem using various mathematical and computational methods:
+The problem is characterized as a mathematical, static, constrained, nonlinear, and convex optimization problem.
 
-### 1. Mathematical Characterization
-[cite_start]The problem is classified as a nonlinear, static, and parametric optimization with equality constraints[cite: 18, 19, 21]. [cite_start]It is further identified as a convex programming problem because the objective function is convex and the feasible set is defined by a consistent equality[cite: 24, 25].
+## Implemented Methods
 
-### 2. Analytical Solution (Lagrange Multipliers)
-[cite_start]The global optimum was determined analytically using the Lagrange Multipliers method[cite: 27]. 
-* [cite_start]**Lagrangian Function**: $L(r, h, \lambda) = 2\pi r^2 + 2\pi rh + \lambda(\pi r^2 h - 500)$[cite: 29].
-* [cite_start]**Optimal Dimensions**: Radius $r \approx 4.301$ m and Height $h \approx 8.602$ m[cite: 31, 32].
-* [cite_start]**Minimum Surface Area**: $\approx 348.73 m^2$[cite: 33].
+The project evaluates three different approaches to find the global optimum:
 
-### 3. Computational Solvers (SciPy)
-[cite_start]The problem is implemented in Python using the `scipy.optimize.minimize` library, specifically utilizing the **SLSQP** (Sequential Least Squares Programming) algorithm to handle the nonlinear constraints[cite: 35, 41].
+1.  **PySCIPOpt (Exact Solver)**: Used as a benchmark to identify the exact mathematical optimum at the constraint boundary.
+2.  **Newton's Method with Restarts**: A second-order optimization technique that utilizes the Hessian matrix and first-order derivatives. It includes a restart mechanism to explore the search space.
+3.  **Simulated Annealing**: A probabilistic heuristic inspired by metallurgy, used to find an approximate global optimum in a continuous search space without requiring derivatives.
 
-### 4. Search Algorithms
-To compare performance against the exact solver, the project includes:
-* [cite_start]**Hill Climbing**: A local search algorithm adapted for continuous variables to find the minimum cost area[cite: 46].
-* [cite_start]**Simulated Annealing**: A metaheuristic approach used to navigate the nonlinear search space and avoid local optima[cite: 48].
+## Key Features
 
-## Results Summary
-
-| Method | Radius (r) | Height (h) | Minimized Area |
-| :--- | :--- | :--- | :--- |
-| **Analytical (Lagrange)** | 4.301 m | 8.602 m | 348.73 m² |
-| **SciPy Solver** | 4.301 m | 8.602 m | 348.73 m² |
+*   **Mathematical Analysis**: Includes the calculation of first and second-order derivatives and verification of the Hessian matrix to prove convexity.
+*   **Visualizations**: Link to 3D graphical representations of the objective function and the feasible region.
+*   **Comparative Analysis**: A detailed comparison of results, showing that the optimum lies exactly on the t1 + t2 = 4.5 constraint boundary.
 
 ## Documentation
-For the full theoretical breakdown, including the Karush-Kuhn-Tucker (KKT) conditions and detailed search space analysis, please refer to the Romanian documentation:
 
-[Read Documentation (Romanian)](TO_NLP_Cosereanu_Emanuel_problema_1.pdf)
+For a detailed theoretical explanation and step-by-step mathematical proof, please refer to the full documentation written in Romanian:
+
+[Read the Romanian Documentation (PDF)](TO_NLP_Cosereanu_Emanuel_problema1.pdf)
+
+## Requirements
+
+The implementation requires Python 3.x and the following libraries:
+*   NumPy
+*   PySCIPOpt
+*   Matplotlib (for local visualizations)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/emanuelco07/Nonlinear_programming_optimization.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Nonlinear_programming_optimization
+   ```
+3. Run the main script:
+   ```bash
+   python Main.py
+   ```
 
 ## Author
-Coșereanu Emanuel
-INFO, Year 3, Group 40322
-[cite_start]Oil & Gas University of Ploiești [cite: 3]
+Emanuel Coșereanu
+INFO Year 3, Group 40322
+University of "Petrol – Gaze", Ploiești
